@@ -1,0 +1,14 @@
+name: AntikSkills
+version: ${project.version}
+main: antikskills.AntikSkills
+api-version: 1.17
+authors: [ MrCoq ]
+description: Skills plugin
+
+commands:
+  level:
+    description: Show level
+  levels:
+    description: Show levels leaderboard
+  backup:
+    description: Backup
