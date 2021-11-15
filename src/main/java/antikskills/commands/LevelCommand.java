@@ -1,7 +1,7 @@
 package antikskills.commands;
 
 import antikskills.AntikSkills;
-import antikskills.interfaces.ShopInterface;
+import antikskills.interfaces.Shop;
 import antikskills.players.AntikPlayer;
 import antikskills.players.AntikPlayerManager;
 import antikskills.utils.IntUtils;
@@ -33,8 +33,7 @@ public class LevelCommand implements CommandExecutor {
                 antikPlayer = antikPlayerManager.getAntikPlayer(player);
 
                 if(antikPlayer.getRewardPoints() > 0) {
-                    ShopInterface shop = new ShopInterface(player);
-                    shop.open();
+                    Shop.Type.MAIN.open(player);
                 } else {
                     player.sendMessage("§cVous n'avez pas assez de point de récompense");
                 }

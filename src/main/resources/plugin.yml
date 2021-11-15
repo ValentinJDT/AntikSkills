@@ -4,6 +4,8 @@ main: antikskills.AntikSkills
 api-version: 1.17
 authors: [ MrCoq ]
 description: Skills plugin
+softdepend:
+  - Vault
 
 commands:
   level:

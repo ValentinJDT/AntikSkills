@@ -54,7 +54,6 @@ public class AntikPlayerManager {
 
     public void save() {
         antikPlayerInterface.saveAntikPlayerList(antikPlayerList);
-        List<Player> playerList = Bukkit.getOnlinePlayers().stream().filter(player -> player.isOp()).collect(Collectors.toList());
         Bukkit.getConsoleSender().sendMessage("§aPlayers levels saved !");
     }
 

@@ -20,18 +20,6 @@ public class AntikPlayer {
         this.name = name;
     }
 
-    public int expForLevel() {
-        // return (int) Math.exp(level) * 10;
-        //return (int) Math.sqrt(level) * 65;
-        //return (int) (Math.exp(level) * 15) / 2;
-        //return (int) (Math.pow(level, 2.5d)*10)+50;
-        return (int) (Math.pow(level, 2d)*Math.exp(3.7)) +250;
-    }
-
-    public int expNeededForLevel() {
-        return expForLevel() - exp;
-    }
-
     public String getName() {
         return name;
     }
@@ -68,6 +56,18 @@ public class AntikPlayer {
         this.exp = exp;
     }
 
+    public int expForLevel() {
+        // return (int) Math.exp(level) * 10;
+        //return (int) Math.sqrt(level) * 65;
+        //return (int) (Math.exp(level) * 15) / 2;
+        //return (int) (Math.pow(level, 2.5d)*10)+50;
+        return (int) (Math.pow(level, 2d)*Math.exp(3.7)) +250;
+    }
+
+    public int expNeededForLevel() {
+        return expForLevel() - exp;
+    }
+
     public void addExp(int exp) {
 
         Player player = Bukkit.getPlayer(this.name);
@@ -91,7 +91,6 @@ public class AntikPlayer {
 
             player.sendMessage("§7Vous venez de passer niveau §b" + this.level + pts);
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f,1.0f);
-
         }
 
     }

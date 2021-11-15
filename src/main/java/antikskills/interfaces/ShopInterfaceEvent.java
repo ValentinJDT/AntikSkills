@@ -1,14 +1,17 @@
 package antikskills.interfaces;
 
 import antikskills.AntikSkills;
+import antikskills.players.AntikPlayer;
 import antikskills.players.AntikPlayerManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.Arrays;
+import java.util.Optional;
 
 public class ShopInterfaceEvent implements Listener {
 
@@ -17,24 +20,25 @@ public class ShopInterfaceEvent implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent e) {
         Player player = (Player) e.getWhoClicked();
-        InventoryView inventoryView = e.getView();
+        InventoryView inventoryView = player.getOpenInventory();
 
-        if(!inventoryView.getTitle().contains("§8Récompense de niveau")) return;
+        if(Arrays.stream(Shop.Type.values()).noneMatch(type -> inventoryView.getTitle().contains(type.getTitle().replace(" (§3%%points%%§8)", ""))))
+            return;
 
-        ItemStack item = e.getCurrentItem();
+        if(e.getCurrentItem() == null || !e.getCurrentItem().hasItemMeta())
+            return;
 
-        if(item == null || !item.hasItemMeta()) return;
+        Optional<Shop.Item> menuItem = Arrays.stream(Shop.Item.values()).filter(item -> item.getName().equals(e.getCurrentItem().getItemMeta().getDisplayName()) && item.getItem().getType() == e.getCurrentItem().getType()).findFirst();
+
         e.setCancelled(true);
+        if(!menuItem.isPresent()) return;
 
-        String itemName = item.getItemMeta().getDisplayName();
-
-        if(itemName.equals("§7")) return;
-        inventoryView.close();
-
-        if(!player.isOp())
-            player.sendMessage("§cFeature non disponible sur le serveur Survie Temporaire");
-
-        antikPlayerManager.getAntikPlayer(player).removeRewardPoint();
+        if(menuItem.get().run(player)) {
+            antikPlayerManager.getAntikPlayer(player).removeRewardPoint();
+            player.getOpenInventory().close();
+        } else {
+            player.sendMessage("§cUne erreur s'est produite lors de l'exécution de cette action");
+        }
     }
 
 }
