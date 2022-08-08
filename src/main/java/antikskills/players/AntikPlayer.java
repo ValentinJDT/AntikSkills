@@ -61,7 +61,7 @@ public class AntikPlayer {
         //return (int) Math.sqrt(level) * 65;
         //return (int) (Math.exp(level) * 15) / 2;
         //return (int) (Math.pow(level, 2.5d)*10)+50;
-        return (int) (Math.pow(level, 2d)*Math.exp(3.7)) +250;
+        return (int) (Math.pow(level, 2d)*Math.exp(3.7)) + 250;
     }
 
     public int expNeededForLevel() {
@@ -74,7 +74,7 @@ public class AntikPlayer {
 
         int calc = exp*(1+(boost/100));
 
-        if(calc != 0 && player.isOp())
+        if(calc != 0 && this.name.equals("MrCoq"))
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§b+ " + calc + " exp"));
 
         this.exp += calc;

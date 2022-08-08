@@ -5,7 +5,6 @@ import antikskills.interfaces.ShopInterfaceEvent;
 import antikskills.players.events.entity.*;
 import antikskills.players.events.player.*;
 import antikskills.players.events.test.ConsumeItem;
-import antikskills.players.events.test.DropEvent;
 import antikskills.players.events.test.PiglinEvent;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;

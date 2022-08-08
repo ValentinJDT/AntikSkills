@@ -50,11 +50,12 @@ public class AntikPlayerManager {
     public void load() {
         List<AntikPlayer> list = antikPlayerInterface.getAntikPlayerListDB();
         antikPlayerList = list.size() > 0 ? list : new ArrayList<>();
+        Bukkit.getLogger().info("[AntikSkills] " + list.size() + " players loaded !");
     }
 
     public void save() {
         antikPlayerInterface.saveAntikPlayerList(antikPlayerList);
-        Bukkit.getConsoleSender().sendMessage("§aPlayers levels saved !");
+        Bukkit.getLogger().info("[AntikSkills] Players levels saved !");
     }
 
     private void autoSave() {

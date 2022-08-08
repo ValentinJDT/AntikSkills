@@ -29,7 +29,7 @@ public class LevelCommand implements CommandExecutor {
             antikPlayer = antikPlayerManager.getAntikPlayer(sender.getName());
         } else {
 
-            if(args[0].equals("shop")) {
+            if(args[0].equalsIgnoreCase("shop")) {
                 antikPlayer = antikPlayerManager.getAntikPlayer(player);
 
                 if(antikPlayer.getRewardPoints() > 0) {
@@ -40,8 +40,8 @@ public class LevelCommand implements CommandExecutor {
 
                 return true;
 
-            } else if(antikPlayerManager.isPlayerExist(args[0])) {
-                antikPlayer = antikPlayerManager.getAntikPlayer(args[0]);
+            } else if(args[0].equalsIgnoreCase("player") && antikPlayerManager.isPlayerExist(args[1])) {
+                antikPlayer = antikPlayerManager.getAntikPlayer(args[1]);
 
             } else {
                 player.sendMessage("§cCe joueur n'existe pas");

@@ -15,6 +15,7 @@ public class BackupCommand implements CommandExecutor {
 
         if(args.length == 1 && args[0].equals("save")) {
             AntikSkills.getAntikPlayerManager().save();
+            sender.sendMessage("§aJoueurs sauvegardés avec succès");
 
         } else if(args.length == 1 && args[0].equals("load")) {
             AntikSkills.getAntikPlayerManager().load();

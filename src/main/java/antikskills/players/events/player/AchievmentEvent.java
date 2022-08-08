@@ -4,6 +4,7 @@ import antikskills.AntikSkills;
 import antikskills.players.AntikPlayer;
 import antikskills.players.AntikPlayerManager;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 
@@ -12,7 +13,7 @@ public class AchievmentEvent implements Listener {
 
     private final AntikPlayerManager antikPlayerManager = AntikSkills.getAntikPlayerManager();
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onObtain(PlayerAdvancementDoneEvent e) {
         if(e.getAdvancement().getCriteria().stream().anyMatch(adv -> adv.contains("the_recipe") || adv.contains("has_")))
             return;

@@ -26,9 +26,9 @@ public class Shop {
     public enum Type {
         MAIN("§8Récompense de niveau (§3%%points%%§8)", 9*3, Material.WHITE_STAINED_GLASS_PANE, (inventory) -> {
             inventory.setItem(10, Item.HEART.getItem());
-            inventory.setItem(12, Item.ATTACK.getItem());
-            inventory.setItem(14, Item.PB_WEBSITE.getItem());
-            inventory.setItem(16, Item.RANDOM_ITEM.getItem());
+            inventory.setItem(12, Item.MONEY.getItem());
+            // inventory.setItem(14, Item.ATTACK.getItem());
+            // inventory.setItem(16, Item.RANDOM_ITEM.getItem());
             return inventory;
         });
 
@@ -95,7 +95,7 @@ public class Shop {
             player.sendMessage("§7Vous avez obtenu §3Diminuer les délais d'attaque §7!");
             return true;
         }),
-        PB_WEBSITE(Material.GOLD_NUGGET, 1, "§7>> §eArgent", new String[] { "§7Obtiens des §eeCoins §7 : ", "§7 - §e5000eC", "§7 - §e3500eC", "§7 - §e1800eC" }, (player) -> {
+        MONEY(Material.GOLD_NUGGET, 1, "§7>> §eArgent", new String[] { "§7Obtiens des §ePièces d'or §7 : ", "§7 - §e5000 PO", "§7 - §e3500 PO", "§7 - §e1800 PO" }, (player) -> {
             Random random = new Random();
 
             double[] money = new double[] {
@@ -104,8 +104,10 @@ public class Shop {
                     1800
             };
 
-            AntikSkills.getInstance().getEconomy().depositPlayer(player, money[random.nextInt(money.length - 1)]);
-            player.sendMessage("§7Vous avez obtenu §e" + money + "eC §7!");
+            double moneySend = money[random.nextInt(money.length - 1)];
+
+            AntikSkills.getInstance().getEconomy().depositPlayer(player, moneySend);
+            player.sendMessage("§7Vous avez obtenu §e" + moneySend + "PO §7!");
             return true;
         }),
         RANDOM_ITEM(Material.PAPER, 1, "§7>> §5Récompense mystère", new String[] { "§7Obtiens des récompenses mystères !", "§7Vous pouvez recevoir des §eclefs§7, des §eitems§7, des §eboosts§7, des §eECoins§7, §e..." }, (player) -> {
